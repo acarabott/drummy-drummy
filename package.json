@@ -1,0 +1,20 @@
+{
+  "name": "drummy-drummy",
+  "version": "1.0.0",
+  "description": "Gettin' drummy with it",
+  "repository": "git@gitlab.com:acarabott/drummy-drummy.git",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-preset-es2015": "latest",
+    "gulp": "latest",
+    "gulp-babel": "latest",
+    "gulp-livereload": "latest",
+    "gulp-sourcemaps": "latest"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Coppen & Arthur Carabott",
+  "license": ""
+}
