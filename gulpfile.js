@@ -9,8 +9,9 @@ gulp.task('babel', function() {
     .pipe(babel({
       presets: ['es2015']
     }))
-    .on('error', function() {
+    .on('error', function(error) {
       console.log('error!');
+      console.log(error.message);
       this.emit('end');
     })
     .pipe(sourcemaps.write('.'))
