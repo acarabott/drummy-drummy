@@ -1,6 +1,5 @@
 const audio = new AudioContext();
 
-
 const playNote = (note=60, time=0, mul=1.0, att=0.01, rel=0.1) => {
   const osc = audio.createOscillator();
   const env = audio.createGain();
@@ -24,17 +23,22 @@ const playNote = (note=60, time=0, mul=1.0, att=0.01, rel=0.1) => {
   });
 };
 
+const playChord = (notes, time, mul, att, rel) => {
+  notes.forEach(note => playNote(note, time, mul, att, rel));
+};
+
+const timingWindow = 0.1;
+
 const keydown = (event) => {
   const curTime = audio.currentTime;
-  console.log(curTime);
-  playNote(67);
-
-  const thresh = 0.1;
   const ahead = Math.abs(curTime - Math.ceil(curTime));
   const behind = curTime - Math.floor(curTime);
-  if (ahead < thresh || behind < thresh) {
+
+  if (ahead < timingWindow || behind < timingWindow) {
+    playChord([72, 76, 79]);
     console.log('HIT!');
   } else {
+    playChord([71, 72, 73]);
     console.log('miss');
   }
 };
