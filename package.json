@@ -7,14 +7,28 @@
   "dependencies": {},
   "devDependencies": {
     "babel-preset-es2015": "latest",
+    "browser-sync": "^2.12.3",
     "gulp": "latest",
     "gulp-babel": "latest",
     "gulp-livereload": "latest",
-    "gulp-sourcemaps": "latest"
+    "gulp-sourcemaps": "latest",
+    "jspm": "github:jspm/jspm-cli"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "browser-sync start --files 'src' --server 'src'",
+    "build": "jspm bundle app --inject"
   },
   "author": "Daniel Coppen & Arthur Carabott",
-  "license": ""
+  "license": "",
+  "jspm": {
+    "directories": {
+      "baseURL": "src"
+    },
+    "dependencies": {},
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  }
 }
