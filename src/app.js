@@ -27,23 +27,26 @@ const playChord = (notes, time, mul, att, rel) => {
   notes.forEach(note => playNote(note, time, mul, att, rel));
 };
 
-const timingWindow = 0.1;
+let timingWindow = 0.15;
 
 const keydown = (event) => {
   const curTime = audio.currentTime;
-  const ahead = Math.abs(curTime - Math.ceil(curTime));
-  const behind = curTime - Math.floor(curTime);
+  const aheadTime = Math.abs(curTime - Math.ceil(curTime));
+  const behindTime = curTime - Math.floor(curTime);
+  const withinWindowBefore = aheadTime < (timingWindow / 2);
+  const withinWindowAfter = behindTime < (timingWindow / 2);
 
-  if (ahead < timingWindow || behind < timingWindow) {
+  if (withinWindowBefore || withinWindowAfter) {
     playChord([72, 76, 79]);
     console.log('HIT!');
   } else {
     playChord([71, 72, 73]);
     console.log('miss');
+    console.log(aheadTime < behindTime ? 'early!' : 'late!');
   }
 };
 
-const bindInput = () => {
+const bindKeyboardInput = () => {
   document.body.addEventListener('keydown', keydown);
 };
 
@@ -53,5 +56,29 @@ const createMetro = (numBeats=100) => {
   }
 };
 
-bindInput();
+const createTimingInput = () => {
+  const input = document.createElement('input');
+  const name = 'window';
+
+  input.name = name;
+  input.type = 'number';
+  input.min = 0;
+  input.step = 0.01;
+  input.value = timingWindow;
+
+  input.addEventListener('change', (event) => {
+    timingWindow = event.target.valueAsNumber;
+    console.log("timingWindow:", timingWindow);
+  });
+
+  const label = document.createElement('label');
+  label.htmlFor = name;
+  label.textContent = 'Timing window';
+
+  document.body.appendChild(label);
+  document.body.appendChild(input);
+};
+
+bindKeyboardInput();
 createMetro(100);
+createTimingInput();
