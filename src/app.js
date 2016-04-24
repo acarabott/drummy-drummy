@@ -79,6 +79,52 @@ const createTimingInput = () => {
   document.body.appendChild(input);
 };
 
+const loadAudio = (path) => {
+  return new Promise((resolve, reject) => {
+    const req = new XMLHttpRequest();
+    req.open('GET', path);
+    req.responseType = 'arraybuffer';
+    req.addEventListener('load', event => {
+      audio.decodeAudioData(req.response).then(resolve, reject);
+    });
+    req.addEventListener('error', event => reject(event));
+    req.send();
+  });
+};
+
+const createLongMetroBuffer = () => {
+  return loadAudio('assets/audio/60bpm-1bar.mp3').then(buffer => {
+    const repetitions = (60 / buffer.duration);
+    const longBuffer = audio.createBuffer(
+      buffer.numberOfChannels,
+      repetitions * buffer.length,
+      buffer.sampleRate
+    );
+
+    for (let c = 0; c < buffer.numberOfChannels; c++) {
+      const channel = buffer.getChannelData(c);
+      for (let i = 0; i < repetitions; i++) {
+        longBuffer.copyToChannel(channel, c, i * buffer.length);
+      }
+    }
+    return longBuffer;
+  });
+};
+
+const createBufferMetro = (file) => {
+  console.log();
+  createLongMetroBuffer().then(buffer => {
+    const source = audio.createBufferSource();
+    source.connect(audio.destination);
+    source.buffer = buffer;
+    source.loop = true;
+    source.start(0);
+    console.log('starting');
+    console.log(source);
+  }, error => { throw Error(error); });
+};
+
 bindKeyboardInput();
-createMetro(100);
+// createMetro(100);
+createBufferMetro();
 createTimingInput();
