@@ -16,7 +16,7 @@
   },
   "scripts": {
     "serve": "browser-sync start --files 'src' --server 'src'",
-    "build": "jspm bundle app --inject"
+    "build": "jspm bundle-sfx app --minify"
   },
   "author": "Daniel Coppen & Arthur Carabott",
   "license": "",
