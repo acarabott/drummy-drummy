@@ -43,8 +43,15 @@ const keydown = (event) => {
   }
 };
 
-document.body.addEventListener('keydown', keydown);
+const bindInput = () => {
+  document.body.addEventListener('keydown', keydown);
+};
 
-for (let i = 0; i < 100; i++) {
-  playNote(60, Math.ceil(audio.currentTime) + i);
-}
+const createMetro = (numBeats=100) => {
+  for (let i = 0; i < numBeats; i++) {
+    playNote(60, Math.ceil(audio.currentTime) + i);
+  }
+};
+
+bindInput();
+createMetro(100);
