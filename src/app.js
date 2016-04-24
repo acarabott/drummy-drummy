@@ -118,9 +118,8 @@ const createBufferMetro = (file) => {
     source.connect(audio.destination);
     source.buffer = buffer;
     source.loop = true;
-    source.start(0);
-    console.log('starting');
-    console.log(source);
+    source.start(Math.ceil(audio.currentTime));
+    console.log(`starting buffer metro at ${Math.ceil(audio.currentTime)}`);
   }, error => { throw Error(error); });
 };
 
