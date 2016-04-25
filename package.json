@@ -8,10 +8,6 @@
   "devDependencies": {
     "babel-preset-es2015": "latest",
     "browser-sync": "^2.12.3",
-    "gulp": "latest",
-    "gulp-babel": "latest",
-    "gulp-livereload": "latest",
-    "gulp-sourcemaps": "latest",
     "jspm": "github:jspm/jspm-cli"
   },
   "scripts": {
