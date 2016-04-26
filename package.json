@@ -2,8 +2,8 @@
   "name": "drummy-drummy",
   "version": "1.0.0",
   "description": "Gettin' drummy with it",
-  "repository": "git@gitlab.com:acarabott/drummy-drummy.git",
-  "main": "gulpfile.js",
+  "repository": "git@github.com:acarabott/drummy-drummy.git",
+  "main": "src/app.js",
   "dependencies": {},
   "devDependencies": {
     "babel-preset-es2015": "latest",
