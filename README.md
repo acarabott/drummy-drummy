@@ -4,5 +4,5 @@ Let's get drummy
 
 ## Authors
 
-Dan Coppen
+Daniel Coppen
 Arthur Carabott
